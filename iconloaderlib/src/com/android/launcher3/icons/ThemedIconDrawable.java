@@ -28,6 +28,8 @@ import android.graphics.ColorFilter;
 import android.graphics.Paint;
 import android.graphics.Rect;
 
+import androidx.annotation.ColorInt;
+
 /**
  * Class to handle monochrome themed app icons
  */
