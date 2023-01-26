@@ -62,7 +62,7 @@ public class ClockDrawableWrapper extends AdaptiveIconDrawable implements Bitmap
 
     private static final String TAG = "ClockDrawableWrapper";
 
-    private static final boolean DISABLE_SECONDS = true;
+    private static final boolean DISABLE_SECONDS = false;
     private static final int NO_COLOR = -1;
 
     // Time after which the clock icon should check for an update. The actual invalidate
@@ -203,7 +203,6 @@ public class ClockDrawableWrapper extends AdaptiveIconDrawable implements Bitmap
         info.defaultHour = metadata.getDefaultHour();
         info.defaultMinute = metadata.getDefaultMinute();
         info.defaultSecond = metadata.getDefaultSecond();
-
 
         LayerDrawable foreground = (LayerDrawable) wrapper.getForeground();
         int layerCount = foreground.getNumberOfLayers();
