@@ -31,6 +31,8 @@ import android.graphics.Color;
 import android.graphics.ColorFilter;
 import android.graphics.Paint;
 import android.graphics.Rect;
+import app.catapult.launcher.icons.AdaptiveIconDrawableCompat;
+
 import android.graphics.drawable.AdaptiveIconDrawable;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
@@ -58,7 +60,7 @@ import app.catapult.launcher.icons.ClockMetadata;
  * clock icons
  */
 @TargetApi(Build.VERSION_CODES.O)
-public class ClockDrawableWrapper extends AdaptiveIconDrawable implements BitmapInfo.Extender {
+public class ClockDrawableWrapper extends AdaptiveIconDrawableCompat implements BitmapInfo.Extender {
 
     private static final String TAG = "ClockDrawableWrapper";
 
@@ -93,7 +95,7 @@ public class ClockDrawableWrapper extends AdaptiveIconDrawable implements Bitmap
     private AnimationInfo mThemeInfo = null;
 
     private ClockDrawableWrapper(AdaptiveIconDrawable base) {
-        super(base.getBackground(), base.getForeground());
+        super(base.getBackground(), base.getForeground(), null);
     }
 
     private void applyThemeData(ThemeData themeData) {
@@ -113,8 +115,8 @@ public class ClockDrawableWrapper extends AdaptiveIconDrawable implements Bitmap
             ta.recycle();
             ClockDrawableWrapper drawable = ClockDrawableWrapper.forExtras(extras, resId -> {
                 Drawable bg = new ColorDrawable(Color.WHITE);
-                Drawable fg = themeData.mResources.getDrawable(resId).mutate();
-                return new AdaptiveIconDrawable(bg, fg);
+                Drawable fg = themeData.mResources.getDrawable(resId, null).mutate();
+                return new AdaptiveIconDrawableCompat(bg, fg);
             });
             if (drawable != null) {
                 mThemeInfo = drawable.mAnimationInfo;
@@ -230,7 +232,7 @@ public class ClockDrawableWrapper extends AdaptiveIconDrawable implements Bitmap
     @Override
     public ClockBitmapInfo getExtendedInfo(Bitmap bitmap, int color,
             BaseIconFactory iconFactory, float normalizationScale) {
-        AdaptiveIconDrawable background = new AdaptiveIconDrawable(
+        AdaptiveIconDrawable background = new AdaptiveIconDrawableCompat(
                 getBackground().getConstantState().newDrawable(), null);
         Bitmap flattenBG = iconFactory.createScaledBitmapWithShadow(background);
 
